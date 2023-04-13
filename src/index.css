@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("../assets/fonts/chivo/_chivo-font.css");
+
+body {
+  font-family: "Chivo";
+}
