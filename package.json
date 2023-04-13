@@ -11,12 +11,12 @@
     "publish": "electron-forge publish",
     "lint-staged": "lint-staged"
   },
+  "license": "GPL-3.0-or-later",
   "keywords": [],
   "author": {
     "name": "Alex Muench",
     "email": "ammuench@gmail.com"
   },
-  "license": "MIT",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.5",
     "@electron-forge/maker-deb": "^6.0.5",
