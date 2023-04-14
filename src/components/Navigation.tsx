@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
 import LogoWithTextPNG from "../../assets/logo/png/logo-with-text.png";
 import { useGoogleProfileStore } from "../store/googleProfileStore";
@@ -13,6 +13,10 @@ const Navigation: React.FC = () => {
 
   const logOut = () => {
     window.electronAPI.logOut();
+  };
+
+  const exit = () => {
+    window.electronAPI.exit();
   };
 
   const { profile } = useGoogleProfileStore();
@@ -79,10 +83,17 @@ const Navigation: React.FC = () => {
                 Item 1
               </a>
             </li>
+            <hr />
             <li>
               <a onClick={logOut}>
                 <ArrowLeftCircleIcon className="h-5 w-5" />
-                Logout
+                Logout & Exit
+              </a>
+            </li>
+            <li>
+              <a onClick={exit}>
+                <XCircleIcon className="h-5 w-5" />
+                Exit
               </a>
             </li>
           </ul>

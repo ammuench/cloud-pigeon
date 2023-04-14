@@ -57,6 +57,9 @@ app.on("ready", () => {
     BrowserWindow.getAllWindows().forEach((window) => window.close());
     createLogoutWindow();
   });
+  ipcMain.on("app:exit", () => {
+    app.quit();
+  });
 
   showWindow();
 });

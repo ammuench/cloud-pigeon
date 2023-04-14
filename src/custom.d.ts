@@ -10,8 +10,9 @@ declare module "*.png" {
 
 interface Window {
   electronAPI: {
-    getProfile: () => Promise<any>; // TODO: Type this
+    getProfile: () => Promise<any>;
     logOut: () => Promise<void>;
-    getPrivateData: () => Promise<any>; // TODO: Type this
+    exit: () => Promise<void>;
+    getPrivateData: () => Promise<any>;
   };
 }
