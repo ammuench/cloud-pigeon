@@ -16,7 +16,6 @@ const LogoSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
         x="0"
         y="0"
         viewBox="17.936996459960938 18.25 64.125 66.34300231933594"
-        enable-background="new 0 0 100 100"
         height="82.92742608521303"
         width="80.15496754454861"
         data-fill-palette-color="accent"

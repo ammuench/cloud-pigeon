@@ -3,4 +3,10 @@ declare module "*.svg" {
   export default content;
 }
 
-declare module "@json2csv/node";
+interface Window {
+  electronAPI: {
+    getProfile: () => Promise<any>; // TODO: Type this
+    logOut: () => Promise<void>;
+    getPrivateData: () => Promise<any>; // TODO: Type this
+  };
+}
