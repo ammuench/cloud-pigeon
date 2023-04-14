@@ -20,6 +20,9 @@ export const createAppWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
+    title: "Cloud Pigeon",
+    backgroundColor: "#20202000",
+    autoHideMenuBar: true,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       nodeIntegration: true,

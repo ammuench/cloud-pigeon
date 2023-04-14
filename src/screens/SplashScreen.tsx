@@ -8,8 +8,17 @@ const SplashScreen: React.FC = () => {
     console.log(data);
   };
 
+  const getPrivateData = async () => {
+    const data = await window.electronAPI.getPrivateData();
+    console.log(data);
+  };
+
+  const logout = async () => {
+    await window.electronAPI.logOut();
+  };
+
   return (
-    <div className="hero min-h-screen bg-primary">
+    <div className="hero min-h-screen bg-base-100">
       <div className="hero-body">
         <div className="container items-center">
           <LogoSVG className="m-auto text-white" />
@@ -21,16 +30,33 @@ const SplashScreen: React.FC = () => {
             your cloud saves on your steam deck and main computer.
           </h2>
         </div>
+        <div>
+          <button
+            className="btn"
+            onClick={async () => {
+              await getProfile();
+            }}
+          >
+            Get Profile?
+          </button>
+          <button
+            className="btn"
+            onClick={async () => {
+              await getPrivateData();
+            }}
+          >
+            Get Private?
+          </button>
+          <button
+            className="btn"
+            onClick={async () => {
+              await logout();
+            }}
+          >
+            Log Out
+          </button>
+        </div>
       </div>
-
-      <button
-        className="btn"
-        onClick={async () => {
-          await getProfile();
-        }}
-      >
-        Get Profile?
-      </button>
     </div>
   );
 };

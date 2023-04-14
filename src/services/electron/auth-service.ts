@@ -18,8 +18,6 @@ try {
   process.exit(1);
 }
 
-// TODO: remove this
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { apiIdentifier, auth0Domain, clientId } = envVariables;
 
 const redirectUri = "http://localhost/callback";
@@ -40,6 +38,9 @@ export const getAuthenticationURL = () =>
   "https://" +
   auth0Domain +
   "/authorize?" +
+  "audience=" +
+  apiIdentifier +
+  "&" +
   "scope=openid profile offline_access&" +
   "response_type=code&" +
   "client_id=" +
