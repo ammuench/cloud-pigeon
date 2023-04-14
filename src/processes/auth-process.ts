@@ -9,8 +9,11 @@ export function createAuthWindow() {
   destroyAuthWin();
 
   win = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 1280,
+    height: 800,
+    title: "Cloud Pigeon | Login",
+    resizable: false,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: false,
     },

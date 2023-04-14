@@ -1,24 +1,11 @@
 import React from "react";
 
+import ScreenWrapper from "../components/ScreenWrapper";
 import LogoSVG from "../svgIcons/LogoSVG";
 
-const SplashScreen: React.FC = () => {
-  const getProfile = async () => {
-    const data = await window.electronAPI.getProfile();
-    console.log(data);
-  };
-
-  const getPrivateData = async () => {
-    const data = await window.electronAPI.getPrivateData();
-    console.log(data);
-  };
-
-  const logout = async () => {
-    await window.electronAPI.logOut();
-  };
-
-  return (
-    <div className="hero min-h-screen bg-base-100">
+const SplashScreen: React.FC = () => (
+  <ScreenWrapper>
+    <div className="hero min-h-full bg-base-100">
       <div className="hero-body">
         <div className="container items-center">
           <LogoSVG className="m-auto text-white" />
@@ -30,34 +17,8 @@ const SplashScreen: React.FC = () => {
             your cloud saves on your steam deck and main computer.
           </h2>
         </div>
-        <div>
-          <button
-            className="btn"
-            onClick={async () => {
-              await getProfile();
-            }}
-          >
-            Get Profile?
-          </button>
-          <button
-            className="btn"
-            onClick={async () => {
-              await getPrivateData();
-            }}
-          >
-            Get Private?
-          </button>
-          <button
-            className="btn"
-            onClick={async () => {
-              await logout();
-            }}
-          >
-            Log Out
-          </button>
-        </div>
       </div>
     </div>
-  );
-};
+  </ScreenWrapper>
+);
 export default SplashScreen;

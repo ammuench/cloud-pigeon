@@ -4,6 +4,10 @@
 
 @import url("../assets/fonts/chivo/_chivo-font.css");
 
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: "Chivo";
   background-color: #20202000;
