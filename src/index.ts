@@ -1,4 +1,5 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow } from "electron";
+import path from "path";
 
 import { DEEP_LINK } from "./constants";
 
@@ -13,9 +14,19 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-export const createAppWindow = (): void => {
+let mainWindow: BrowserWindow;
+
+const logEverywhere = (s: any) => {
+  console.log(s);
+  if (mainWindow && mainWindow.webContents) {
+    let safeS = typeof s === "string" ? s : JSON.stringify(s);
+    mainWindow.webContents.executeJavaScript(`console.log('${safeS}')`);
+  }
+};
+
+export const createWindow = (): void => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     height: 800,
     width: 1280,
     resizable: false,
@@ -35,33 +46,6 @@ export const createAppWindow = (): void => {
   mainWindow.webContents.openDevTools();
 };
 
-const showWindow = async () => {
-  createAppWindow();
-  // try {
-  //   await authService.refreshTokens();
-  // } catch (err) {
-  //   createAuthWindow();
-  // }
-};
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on("ready", () => {
-  // Handle IPC messages from the renderer process.
-  // ipcMain.handle("auth:get-profile", authService.getProfile);
-  // ipcMain.handle("api:get-private-data", apiService.getPrivateData);
-  // ipcMain.on("auth:log-out", () => {
-  //   BrowserWindow.getAllWindows().forEach((window) => window.close());
-  //   createLogoutWindow();
-  // });
-  ipcMain.on("app:exit", () => {
-    app.quit();
-  });
-
-  showWindow();
-});
-
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -75,19 +59,78 @@ app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
-    createAppWindow();
+    createWindow();
   }
 });
 
-app.setAsDefaultProtocolClient(DEEP_LINK);
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    app.setAsDefaultProtocolClient(DEEP_LINK, process.execPath, [
+      path.resolve(process.argv[1]),
+    ]);
+  }
+} else {
+  app.setAsDefaultProtocolClient(DEEP_LINK);
+}
 
-app.on("open-url", (event, data) => {
-  console.log({
-    label: "DEEPLINK_WORKED",
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.whenReady().then(() => {
+  createWindow();
+});
+
+let deeplinkingUrl;
+
+// TODO define isDev
+const isDev = true;
+if (isDev && process.platform === "win32") {
+  // Set the path of electron.exe and your app.
+  // These two additional parameters are only available on windows.
+  // Setting this is required to get this working in dev mode.
+  // app.setAsDefaultProtocolClient(`${DEEP_LINK}`, process.execPath, [
+  //   resolve(process.argv[1]),
+  // ]);
+} else {
+  app.setAsDefaultProtocolClient(`${DEEP_LINK}`);
+}
+
+app.on("open-url", function (event, url) {
+  event.preventDefault();
+  deeplinkingUrl = url;
+  logEverywhere({
+    label: "HELLO FROM DEEPLINK1",
+    deeplinkingUrl,
     event,
-    data,
+    url,
   });
 });
+
+// Force single application instance
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on("second-instance", (e, argv) => {
+    if (process.platform !== "darwin") {
+      // Find the arg that is our custom protocol url and store it
+      deeplinkingUrl = argv.find((arg) => arg.startsWith(`${DEEP_LINK}://`));
+      logEverywhere("app.makeSingleInstance# " + deeplinkingUrl);
+      logEverywhere({
+        label: "HELLO FROM DEEPLINK2",
+        deeplinkingUrl,
+        e,
+        argv,
+      });
+    }
+
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    }
+  });
+}
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
