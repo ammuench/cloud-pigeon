@@ -1,12 +1,19 @@
-import { MakerDeb } from "@electron-forge/maker-deb";
+import { MakerDeb, MakerDebConfig } from "@electron-forge/maker-deb";
 import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerZIP } from "@electron-forge/maker-zip";
 // import { MakerRpm } from "@electron-forge/maker-rpm";
 import { WebpackPlugin } from "@electron-forge/plugin-webpack";
 import type { ForgeConfig } from "@electron-forge/shared-types";
 
+import { DEEP_LINK } from "./src/constants";
 import { mainConfig } from "./webpack.main.config";
 import { rendererConfig } from "./webpack.renderer.config";
+
+const DEB_CONFIG: MakerDebConfig = {
+  options: {
+    mimeType: [`x-scheme-handler/${DEEP_LINK}`],
+  },
+};
 
 const config: ForgeConfig = {
   packagerConfig: {},
@@ -15,7 +22,7 @@ const config: ForgeConfig = {
     new MakerSquirrel({}),
     new MakerZIP({}, ["darwin"]),
     // new MakerRpm({}),
-    new MakerDeb({}),
+    new MakerDeb(DEB_CONFIG),
   ],
   plugins: [
     new WebpackPlugin({
