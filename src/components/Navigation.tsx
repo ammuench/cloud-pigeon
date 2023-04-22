@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowLeftCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
 
 import LogoWithTextPNG from "../../assets/logo/png/logo-with-text.png";
-import { useGoogleProfileStore } from "../store/googleProfileStore";
+// import { useGoogleProfileStore } from "../store/googleProfileStore";
+import * as token from "../../DEV_TOKEN.json";
 
 const Navigation: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -19,7 +21,28 @@ const Navigation: React.FC = () => {
     window.electronAPI.exit();
   };
 
-  const { profile } = useGoogleProfileStore();
+  const [profile, setProfile] = useState<any>(null);
+
+  useEffect(() => {
+    if (profile === null) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${token.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token.id_token}`,
+            },
+          }
+        )
+        .then((res: any) => {
+          console.log(res.data);
+          setProfile(res.data);
+        })
+        .catch((error: any) => {
+          throw new Error(error.message);
+        });
+    }
+  }, []);
 
   return (
     <div className="navbar bg-primary text-primary-content">
@@ -35,7 +58,7 @@ const Navigation: React.FC = () => {
               onClick={toggleMenu}
               className="btn flex w-auto justify-between gap-4 overflow-hidden border-0  pr-0 text-white"
             >
-              {`${profile.nickname}`}
+              {`${profile.name}`}
               <img className="h-12 w-12" src={profile.picture} />
             </button>
           )}
