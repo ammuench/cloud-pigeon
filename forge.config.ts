@@ -12,15 +12,15 @@ import { rendererConfig } from "./webpack.renderer.config";
 const DEB_CONFIG: MakerDebConfig = {
   options: {
     mimeType: [`x-scheme-handler/${DEEP_LINK}`],
-    name: "cloud-pigeon-electron",
+    name: "cloud-pigeon",
     productName: "Cloud Pigeon",
   },
 };
 
 const config: ForgeConfig = {
   packagerConfig: {
-    name: "cloud-pigeon-electron",
-    executableName: "cloud-pigeon-electron",
+    name: "cloud-pigeon",
+    executableName: "cloud-pigeon",
   },
   rebuildConfig: {},
   makers: [

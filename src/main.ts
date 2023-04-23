@@ -2,7 +2,7 @@ import { app, BrowserWindow, ipcMain, shell } from "electron";
 import store from "electron-store";
 import path from "path";
 
-import * as DEV_TOKEN from "../../../DEV_TOKEN.json";
+import * as DEV_TOKEN from "../DEV_TOKEN.json";
 
 import { reauthGoogleToken } from "./services/google-refresh-token.service";
 import { ElectronStore, GoogleToken } from "./types/electron-store.types";
