@@ -83,10 +83,10 @@ typings/
 .dynamodb/
 
 # Webpack
-.webpack/
+apps/electron/.webpack/
 
 # Electron-Forge
-out/
+apps/electron/out/
 
 tailwind.config.js
 postcss.config.js

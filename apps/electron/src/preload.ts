@@ -1,14 +1,26 @@
-import { contextBridge } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
+
+import { ElectronStore, GoogleToken } from "./types/JSON/electron-store.types";
+
+export const CHANNELS = {
+  GET_GOOGLE_TOKEN: "app:get-google-token",
+  UPDATE_ELECTRON_STORE: "app:update-electron-store",
+  EXIT: "app:exit",
+} as const;
 
 // API Definition
 const electronAPI = {
-  // getProfile: () => ipcRenderer.invoke("auth:get-profile"),
-  // logOut: () => ipcRenderer.send("auth:log-out"),
-  // exit: () => ipcRenderer.send("app:exit"),
-  // getPrivateData: () => ipcRenderer.invoke("api:get-private-data"),
+  getGoogleToken: (): Promise<GoogleToken> =>
+    ipcRenderer.invoke(CHANNELS.GET_GOOGLE_TOKEN),
+  updateElectronStore: <K extends keyof ElectronStore>(
+    key: K,
+    newValue: ElectronStore[K]
+  ): Promise<ElectronStore> =>
+    ipcRenderer.invoke(CHANNELS.UPDATE_ELECTRON_STORE, [key, newValue]),
+  exit: () => ipcRenderer.send(CHANNELS.EXIT),
 };
 
 // Register the API with the contextBridge
 process.once("loaded", () => {
-  contextBridge.exposeInMainWorld("electronAPI", electronAPI);
+  contextBridge?.exposeInMainWorld("electronAPI", electronAPI);
 });

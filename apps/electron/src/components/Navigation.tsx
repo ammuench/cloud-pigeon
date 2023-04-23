@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ArrowLeftCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
 
-// import { useGoogleProfileStore } from "../store/googleProfileStore";
-import * as token from "../../../../DEV_TOKEN.json";
+// @ts-ignore
 import LogoWithTextPNG from "../../assets/logo/png/logo-with-text.png";
+import { useGoogleProfileStore } from "../store/googleProfileStore";
 
 const Navigation: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -14,35 +13,16 @@ const Navigation: React.FC = () => {
   };
 
   const logOut = () => {
-    window.electronAPI.logOut();
+    // TODO: RESTORE THIS
+    // window.electronAPI.logOut();
   };
 
   const exit = () => {
     window.electronAPI.exit();
   };
 
-  const [profile, setProfile] = useState<any>(null);
-
-  useEffect(() => {
-    if (profile === null) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${token.access_token}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token.id_token}`,
-            },
-          }
-        )
-        .then((res: any) => {
-          console.log(res.data);
-          setProfile(res.data);
-        })
-        .catch((error: any) => {
-          throw new Error(error.message);
-        });
-    }
-  }, []);
+  const { profile } = useGoogleProfileStore();
+  console.log(profile);
 
   return (
     <div className="navbar bg-primary text-primary-content">

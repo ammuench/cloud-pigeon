@@ -18,5 +18,12 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["apps/electron/src/**/*.ts", "apps/electron/src/**/*.tsx"]
+  "include": [
+    "apps/electron/*.ts",
+    "apps/electron/src/*.ts",
+    "apps/electron/src/*.tsx",
+    "apps/electron/src/**/*.ts",
+    "apps/electron/src/**/*.tsx",
+    "apps/electron/src/custom.d.ts"
+  ]
 }

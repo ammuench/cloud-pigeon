@@ -1,18 +1,14 @@
-declare module "*.svg" {
-  const content: string;
-  export default content;
-}
+import { ElectronStore, GoogleToken } from "./types/JSON/electron-store.types";
 
-declare module "*.png" {
-  const content: string;
-  export default content;
-}
-
-interface Window {
-  electronAPI: {
-    getProfile: () => Promise<any>;
-    logOut: () => Promise<void>;
-    exit: () => Promise<void>;
-    getPrivateData: () => Promise<any>;
-  };
+declare global {
+  interface Window {
+    electronAPI: {
+      getGoogleToken: () => Promise<GoogleToken>;
+      updateElectronStore: <K extends keyof ElectronStore>(
+        key: K,
+        newValue: ElectronStore[K]
+      ) => Promise<ElectronStore>;
+      exit: () => Promise<void>;
+    };
+  }
 }

@@ -1,19 +1,6 @@
 import { create } from "zustand";
 
-export type GoogleProfile = {
-  given_name: string;
-  family_name: string;
-  nickname: string;
-  name: string;
-  picture: string;
-  locale: string;
-  updated_at: string;
-  iss: string;
-  aud: string;
-  iat: number;
-  exp: number;
-  sub: string;
-};
+import { GoogleProfile } from "../services/google-profile.service";
 
 type GoogleProfileStore = {
   profile: GoogleProfile | null;
