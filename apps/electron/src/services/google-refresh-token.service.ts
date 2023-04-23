@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import type { GoogleToken } from "../types/JSON/electron-store.types";
+import type { GoogleToken } from "../types/electron-store.types";
 
 type RefreshTokenResponse = Omit<GoogleToken, "expiry_date">;
 

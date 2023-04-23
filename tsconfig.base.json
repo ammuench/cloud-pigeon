@@ -15,8 +15,6 @@
     "jsx": "react-jsx",
     "paths": {
       "*": ["node_modules/*"]
-    },
-    "types": ["./custom.d.ts"]
-  },
-  "include": ["./*.ts"]
+    }
+  }
 }

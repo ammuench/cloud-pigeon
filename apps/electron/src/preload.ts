@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 
-import { ElectronStore, GoogleToken } from "./types/JSON/electron-store.types";
+import { ElectronStore, GoogleToken } from "./types/electron-store.types";
 
 export const CHANNELS = {
   GET_GOOGLE_TOKEN: "app:get-google-token",

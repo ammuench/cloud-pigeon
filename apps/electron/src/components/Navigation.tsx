@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { ArrowLeftCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 
-// @ts-ignore
 import LogoWithTextPNG from "../../assets/logo/png/logo-with-text.png";
 import { useGoogleProfileStore } from "../store/googleProfileStore";
+import { ElectronWindow } from "../types/window.types";
+
+declare let window: ElectronWindow;
 
 const Navigation: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);

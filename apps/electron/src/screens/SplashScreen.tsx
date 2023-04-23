@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import { getGoogleProfile } from "../services/google-profile.service";
 import { useGoogleProfileStore } from "../store/googleProfileStore";
+import { ElectronWindow } from "../types/window.types";
+
+declare let window: ElectronWindow;
 
 const SplashScreen: React.FC = () => {
   const { profile, setGoogleProfile } = useGoogleProfileStore();

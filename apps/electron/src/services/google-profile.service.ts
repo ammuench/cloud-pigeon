@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GoogleToken } from "../types/JSON/electron-store.types";
+import { GoogleToken } from "../types/electron-store.types";
 
 export type GoogleProfile = {
   id: string;

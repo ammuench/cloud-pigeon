@@ -10,7 +10,7 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": ["tsconfig.json", "tsconfig.next.json", "tsconfig.electron.json"]
+    "project": ["./apps/next/tsconfig.json", "./apps/electron/tsconfig.json"]
   },
   "rules": {
     "import-newlines/enforce": 0

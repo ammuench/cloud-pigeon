@@ -5,7 +5,7 @@ import path from "path";
 import * as DEV_TOKEN from "../../../DEV_TOKEN.json";
 
 import { reauthGoogleToken } from "./services/google-refresh-token.service";
-import { ElectronStore, GoogleToken } from "./types/JSON/electron-store.types";
+import { ElectronStore, GoogleToken } from "./types/electron-store.types";
 import { DEEP_LINK } from "./constants";
 import { CHANNELS } from "./preload";
 
@@ -159,36 +159,39 @@ const reauthToken = async (currentToken: GoogleToken) => {
   } catch (e) {
     // TODO: handle error
     openSignin();
-    console.error(e);
+    logEverywhere({
+      error: e,
+      label: "FAILURE DURING REAUTH",
+    });
   }
 };
 
 //TODO: Remove console logs after debugging
 if (googleToken) {
-  console.log("[INFO] Have token, attempting reauth");
+  logEverywhere("[INFO] Have token, attempting reauth");
   reauthToken(googleToken).then((newToken) => {
     appStore.set("googleToken", {
       ...googleToken,
       ...newToken,
     });
-    console.log("[SUCCESS] Successful reauth");
-    console.log({
+    logEverywhere("[SUCCESS] Successful reauth");
+    logEverywhere({
       googleToken,
       newToken,
     });
   });
 } else {
-  console.log("[INFO] No token, looking to get one");
+  logEverywhere("[INFO] No token, looking to get one");
   if (isDev) {
     if (DEV_TOKEN) {
-      console.log("[INFO] Loading DEV_TOKEN");
+      logEverywhere("[INFO] Loading DEV_TOKEN");
       appStore.set("googleToken", DEV_TOKEN);
     } else {
-      console.log("[INFO] Opening Signin");
+      logEverywhere("[INFO] Opening Signin");
       openSignin();
     }
   } else {
-    console.log("[INFO] Opening Signin");
+    logEverywhere("[INFO] Opening Signin");
     openSignin();
   }
 }
