@@ -6,5 +6,8 @@ const ForkTsCheckerWebpackPlugin: typeof IForkTsCheckerWebpackPlugin = require("
 export const plugins = [
   new ForkTsCheckerWebpackPlugin({
     logger: "webpack-infrastructure",
+    typescript: {
+      configFile: "../../tsconfig.electron.json",
+    },
   }),
 ];

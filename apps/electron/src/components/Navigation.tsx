@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { ArrowLeftCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 
-import LogoWithTextPNG from "../../assets/logo/png/logo-with-text.png";
 // import { useGoogleProfileStore } from "../store/googleProfileStore";
-import * as token from "../../DEV_TOKEN.json";
+import * as token from "../../../../DEV_TOKEN.json";
+import LogoWithTextPNG from "../../assets/logo/png/logo-with-text.png";
 
 const Navigation: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);

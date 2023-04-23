@@ -21,8 +21,8 @@ export const rules: Required<ModuleOptions>["rules"] = [
     },
   },
   {
-    test: /\.tsx?$/,
-    exclude: /(node_modules|\.webpack)/,
+    test: /.\.tsx?$/,
+    exclude: /(node_modules|\.webpack|app\/next)/,
     use: {
       loader: "ts-loader",
       options: {

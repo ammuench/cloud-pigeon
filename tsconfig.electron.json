@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "ES6",
     "allowJs": true,
@@ -16,5 +17,6 @@
     "paths": {
       "*": ["node_modules/*"]
     }
-  }
+  },
+  "include": ["apps/electron/src/**/*.ts", "apps/electron/src/**/*.tsx"]
 }

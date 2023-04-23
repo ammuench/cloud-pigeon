@@ -1,3 +1,4 @@
+import path from "path";
 import type { Configuration } from "webpack";
 
 import { rules } from "./webpack.rules";
@@ -8,6 +9,9 @@ export const mainConfig: Configuration = {
    * that runs in the main process.
    */
   entry: "./src/index.ts",
+  output: {
+    path: path.resolve(__dirname, ".webpack"),
+  },
   // Put your normal webpack config below here
   module: {
     rules,
