@@ -93,3 +93,5 @@ env-variables.json
 electron-backend/
 
 DEV_TOKEN.json
+
+*.code-workspace
