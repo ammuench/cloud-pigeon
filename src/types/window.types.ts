@@ -7,6 +7,7 @@ export interface ElectronWindow extends Window {
       key: K,
       newValue: ElectronStore[K]
     ) => Promise<ElectronStore>;
+    openExternalBrowser: (url: string) => Promise<void>;
     exit: () => Promise<void>;
   };
 }

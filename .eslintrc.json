@@ -4,8 +4,8 @@
     "es6": true,
     "node": true
   },
-  "plugins": ["@typescript-eslint", "prettier"],
-  "extends": ["eslint-config-amuench", "prettier"],
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "extends": ["prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -13,6 +13,26 @@
     "project": ["./tsconfig.json"]
   },
   "rules": {
-    "import-newlines/enforce": 0
+    "import-newlines/enforce": 0,
+    "arrow-body-style": ["error", "as-needed"],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // Packages `react` related packages come first.
+          ["^react", "^electron", "^next", "^@angular", "^@?\\w"],
+          // Internal packages.
+          ["^(@|components)(/.*|$)"],
+          // Side effect imports.
+          ["^\\u0000"],
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          // Style imports.
+          ["^.+\\.?(css)$"]
+        ]
+      }
+    ]
   }
 }

@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { ROUTES } from "../constants";
 import { getGoogleProfile } from "../services/google-profile.service";
 import { useGoogleProfileStore } from "../store/googleProfileStore";
 import { ElectronWindow } from "../types/window.types";
@@ -9,21 +10,38 @@ declare let window: ElectronWindow;
 
 const SplashScreen: React.FC = () => {
   const { profile, setGoogleProfile } = useGoogleProfileStore();
+  const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
 
+  const openSignin = () => {
+    window.electronAPI.openExternalBrowser(ROUTES.signIn);
+  };
+
   useEffect(() => {
+    // TODO: Remove logs
     if (!profile) {
-      window.electronAPI.getGoogleToken().then(async (googleToken) => {
-        if (googleToken) {
-          const { data } = await getGoogleProfile(googleToken);
+      window.electronAPI
+        .getGoogleToken()
+        .then(async (googleToken) => {
+          if (googleToken) {
+            const { data } = await getGoogleProfile(googleToken);
+            console.log({
+              label: "FETCHED_GOOGLE_PROFILE",
+              data,
+            });
+            setGoogleProfile(data);
+            navigate("/dashboard");
+          } else {
+            setShowLogin(true);
+          }
+        })
+        .catch((e) => {
           console.log({
-            label: "FETCHED_GOOGLE_PROFILE",
-            data,
+            label: "FETCH_GOOGLE_PROFILE_ERROR",
+            e,
           });
-          setGoogleProfile(data);
-          navigate("/dashboard");
-        }
-      });
+          setShowLogin(true);
+        });
     }
   }, []);
 
@@ -234,7 +252,13 @@ const SplashScreen: React.FC = () => {
               <div></div>
             </div>
             <div style={{ textAlign: "center" }}>
-              Logging into Google Drive...
+              {showLogin ? (
+                <button className="btn-primary btn" onClick={openSignin}>
+                  Log Into Google Drive
+                </button>
+              ) : (
+                "Logging into Google Drive..."
+              )}
             </div>
           </div>
         </div>

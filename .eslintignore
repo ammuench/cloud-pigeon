@@ -90,3 +90,6 @@ apps/electron/out/
 
 tailwind.config.js
 postcss.config.js
+
+*.js
+*.jsx
