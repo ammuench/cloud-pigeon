@@ -4,7 +4,11 @@ export default defineNuxtConfig({
   ssr: false, // You can change it to true (not recommended) to make the app start up slightly faster at the cost of larger binary size
   imports: {
     dirs: [
-      'wailsjs/runtime/**', // Auto-import wails runtime
+      "wailsjs/runtime/**", // Auto-import wails runtime
     ],
   },
-})
+  modules: ["@nuxt/eslint"],
+  eslint: {
+    // options here
+  },
+});

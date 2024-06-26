@@ -19,12 +19,10 @@
   "keywords": [],
   "author": "Alex Muench",
   "devDependencies": {
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@nuxtjs/eslint-module": "^4.1.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^8.10.0",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
-    "prettier": "^3.3.2",
+    "@nuxt/eslint": "^0.3.13",
+    "eslint": "^9.5.0",
+    "eslint-plugin-simple-import-sort": "^12.1.0",
+    "prettier": "3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5"
   }
 }
