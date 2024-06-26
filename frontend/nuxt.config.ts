@@ -7,8 +7,11 @@ export default defineNuxtConfig({
       "wailsjs/runtime/**", // Auto-import wails runtime
     ],
   },
-  modules: ["@nuxt/eslint"],
+  modules: ["@nuxt/eslint", "@nuxt/ui"],
   eslint: {
     // options here
+  },
+  colorMode: {
+    preference: "dark",
   },
 });

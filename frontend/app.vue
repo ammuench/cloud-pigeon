@@ -1,23 +1,8 @@
 <template>
-  <WailsNuxtWelcome />
+  <div
+    class="flex h-screen w-screen flex-col items-center justify-center gap-4 dark:bg-gray-800"
+  >
+    <h1 class="text-3xl text-neutral-100">cloudpigeon.</h1>
+    <UButton variant="solid">login</UButton>
+  </div>
 </template>
-<style>
-html,
-body,
-#__nuxt {
-  background: #282828;
-  color: white;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  height: 100dvh;
-  margin: unset;
-  padding: unset;
-}
-html {
-  box-sizing: border-box;
-}
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-</style>
