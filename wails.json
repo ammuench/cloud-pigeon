@@ -1,0 +1,13 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "cloud-pigeon",
+  "outputfilename": "cloud-pigeon",
+  "frontend:install": "pnpm install",
+  "frontend:build": "pnpm run generate",
+  "frontend:dev:watcher": "pnpm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "Alex Muench",
+    "email": "ammuench@gmail.com"
+  }
+}
