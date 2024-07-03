@@ -1,5 +1,5 @@
 {
-  "*.{js,ts,vue}": ["eslint -c frontend/eslint.config.mjs --fix", "prettier --write"],
+  "!(frontend/bindings/**/*)*.{js,ts,vue}": ["eslint -c frontend/eslint.config.mjs --fix", "prettier --write"],
   "*.{json,md,html,css}": "prettier -c frontend/.prettierrc --write",
   "*.go": "gofumpt -w"
 }

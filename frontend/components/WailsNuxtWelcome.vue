@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import nuxtLogo from "~/assets/images/nuxt.png";
 import wailsLogo from "~/assets/images/logo-universal.png";
+import nuxtLogo from "~/assets/images/nuxt.png";
 import { Greet } from "~/wailsjs/go/main/App";
 
 const name = ref<string>("");
@@ -15,8 +15,14 @@ async function greet() {
     <div class="screen-centered-card-wrapper">
       <div class="screen-centered-card">
         <div class="logos">
-          <img :src="wailsLogo" style="height: 100%" />
-          <img :src="nuxtLogo" style="height: 50%" />
+          <img
+            :src="wailsLogo"
+            style="height: 100%"
+          />
+          <img
+            :src="nuxtLogo"
+            style="height: 50%"
+          />
         </div>
         <div>
           <h1>Welcome to Wails + Nuxt</h1>
@@ -31,10 +37,20 @@ async function greet() {
             placeholder="Your name..."
             class="input greeter-input"
           />
-          <button class="btn greeter-button" @click="greet">Greet</button>
+          <button
+            class="btn greeter-button"
+            @click="greet"
+          >
+            Greet
+          </button>
         </div>
         <div>
-          <button class="btn" @click="Quit()">Close App</button>
+          <button
+            class="btn"
+            @click="Quit()"
+          >
+            Close App
+          </button>
         </div>
       </div>
     </div>

@@ -10,6 +10,8 @@ export default withNuxt({
     "**/build/",
     "**/scripts/",
     "**/assets/",
+    "**/bindings/",
+    "**/bindings/changeme/",
   ],
   plugins: {
     "simple-import-sort": simpleImportSort,
