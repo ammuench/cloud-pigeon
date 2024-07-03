@@ -20,5 +20,6 @@ export default withNuxt({
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "vue/html-self-closing": "off",
-  },
+    "vue/multi-word-component-names": "off"
+  }
 });
